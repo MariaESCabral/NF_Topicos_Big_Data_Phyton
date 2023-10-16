@@ -7,7 +7,7 @@ Suponha que você deseje investigar a relação entre o consumo de tabaco e a ta
 
 # Referências Bibliográficas
  Dados Estatísticos IBGE: https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html<br>
- Estatísticas cardiovascular brasil: https://abccardiol.org/article/estatistica-cardiovascular-brasil-2020/
+ Estatísticas cardiovascular brasil: https://abccardiol.org/article/estatistica-cardiovascular-brasil-2020/<br>
  Vigitel Brasil 2006-2020 - Tabagismo e Consumo Abusivo de Álcool: https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/svsa/vigitel/vigitel-brasil-2006-2020-e-tabagismo-e-consumo-abusivo-de-alcool.pdf/view
  
 # Autor:
