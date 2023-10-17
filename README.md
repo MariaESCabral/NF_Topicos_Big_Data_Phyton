@@ -3,7 +3,8 @@ As análises presentes neste relatório são de natureza avaliativa, apresentada
 <br><br>
 
 # Objetivo
-Suponha que você deseje investigar a relação entre o consumo de tabaco e a taxa de mortalidade por doenças cardiovasculares em um país específico. A primeira etapa deste projeto consistirá em utilizar a análise de regressão linear para avaliar a associação entre a taxa de mortalidade por doenças cardiovasculares e o consumo de tabaco per capita no país ao longo de vários anos.
+Suponha que você deseje investigar a relação entre o consumo de tabaco e a taxa de mortalidade em um país específico e ano específico e seja necessária uma visualização gráfica representada por um gráfico os resultados desta pesquisa.
+A primeira etapa das análises consiste em uma análise de regressao linear que você deseja mostrar a taxa de mortalidade causada por tabagismo nos anos de 1990 a 2012.
 
 # Referências Bibliográficas
  Dados Estatísticos IBGE: https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html<br>
