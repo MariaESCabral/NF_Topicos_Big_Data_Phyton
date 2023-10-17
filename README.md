@@ -8,8 +8,9 @@ A primeira etapa das análises consiste em uma análise de regressao linear que 
 
 # Referências Bibliográficas
  Dados Estatísticos IBGE: https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html<br>
- Estatísticas cardiovascular brasil: https://abccardiol.org/article/estatistica-cardiovascular-brasil-2020/<br>
- Vigitel Brasil 2006-2020 - Tabagismo e Consumo Abusivo de Álcool: https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/svsa/vigitel/vigitel-brasil-2006-2020-e-tabagismo-e-consumo-abusivo-de-alcool.pdf/view
+Our World in Data - https://ourworldindata.org/smoking<br>
+Codigo disponível no GitHub: https://github.com/MariaESCabral/NF_Topicos_Big_Data_Python/tree/main
+
  
 # Autor:
 Maria Cabral - mariaeduardacabral170@gmail.com
