@@ -16,34 +16,59 @@ from sklearn.linear_model import LinearRegression
 
 # Importando os Dados
 # Utilizei o número absoluto de procedimentos anuais pagos pelo SUS para deduzir o número de casos de problema cardiovascular no ano.
-tb_insufcardiaca = pd.read_csv('https://raw.githubusercontent.com/MariaESCabral/NF_Topicos_Big_Data_Phyton/main/Tabela%201-7%20%E2%80%93%20N%C3%BAmero%20absoluto%20e%20taxas%20de%20procedimentos%20anuais%20pagos%20pelo%20SUS%2C%20de%202008%20a%202018%2C%20por%20grupo.csv', sep=';')
-tb_percfumantes= pd.read_csv('https://raw.githubusercontent.com/MariaESCabral/NF_Topicos_Big_Data_Phyton/main/VIGITEL%20BRASIL%202006-2020%20-%20TABAGISMO%20E%20CONSUMO%20ABUSIVO%20DE%20%C3%81LCOOL%2022.csv', sep=';')
+#tb_insufcardiaca = pd.read_csv('https://raw.githubusercontent.com/MariaESCabral/NF_Topicos_Big_Data_Phyton/main/Tabela%201-7%20%E2%80%93%20N%C3%BAmero%20absoluto%20e%20taxas%20de%20procedimentos%20anuais%20pagos%20pelo%20SUS%2C%20de%202008%20a%202018%2C%20por%20grupo.csv', sep=';')
+#tb_percfumantes= pd.read_csv('https://raw.githubusercontent.com/MariaESCabral/NF_Topicos_Big_Data_Phyton/main/VIGITEL%20BRASIL%202006-2020%20-%20TABAGISMO%20E%20CONSUMO%20ABUSIVO%20DE%20%C3%81LCOOL%2022.csv', sep=';')
+tb_taxamorte = pd.read_csv('https://raw.githubusercontent.com/MariaESCabral/NF_Topicos_Big_Data_Python/main/death-rate-smoking%20(1).csv', sep=';')
+tb_cigarroporpessoa = pd.read_csv('https://raw.githubusercontent.com/MariaESCabral/NF_Topicos_Big_Data_Python/main/consumption-per-smoker-per-day-bounds-brasil.csv', sep=';')
 
-df = tb_insufcardiaca.merge(tb_percfumantes, on='Ano', how='inner') # com o inner os anos que dão NaN já são descartados
+# Remove as duas primeiras colunas que são inuteis.
+tb_taxamorte = tb_taxamorte.iloc[:, 2:]  
+tb_cigarroporpessoa = tb_cigarroporpessoa.iloc[:, 2:]
 
-# Removendo os pontos das tabelas
-df['Total_x'] = df['Total_x'].str.replace(',', '').astype(float) # valor absoluto
-df['Total_y'] = df['Total_y'].str.replace(',', '.').astype(float) # porcentagem
+# Renomeando colunas
+tb_taxamorte.columns = ['ANO', 'TAXA DE MORTE']
+tb_cigarroporpessoa.columns = ['ANO', 'CIGARROS POR DIA']
 
-# Atribuindo oq irei ultilizar de X e Y
-x = df[['Total_x']]
-y = df['Total_y']
+# Junta as duas tabelas
+df = tb_cigarroporpessoa.merge(tb_taxamorte, on='ANO', how='inner') # com o inner os anos que dão NaN já são descartados
 
+# Deleta coluna ANO que não é mais necessaria pro inner
+df = df.drop(columns=['ANO'])
+
+# Removendo as virgulas da tabela e convertendo
+df['CIGARROS POR DIA'] = df['CIGARROS POR DIA'].str.replace(',', '.').astype(float) # valor por n 100 mil habitates
+df['TAXA DE MORTE'] = df['TAXA DE MORTE'].str.replace(',', '.').astype(float) # valor por n 100 mil habitates
+
+# Atribuindo oq irei ultilizar de X(variável independente) e Y (variável dependente)
+x = df[['CIGARROS POR DIA']]  # Variável independente (X): Consumo de tabaco per capita (por exemplo, número médio de cigarros fumados por pessoa por ano).
+y = df['TAXA DE MORTE']     # Variável dependente (Y): Taxa de mortalidade por doenças cardiovasculares (por exemplo, número de mortes por 100.000 habitantes devido a doenças cardiovasculares).
+
+# Multiplicando os valores de x por 365 para saber a media anual
+x = x.apply(lambda x: x * 365)
+
+# Criando o modelo de regressão linear
 model = LinearRegression()
+
+# Treinando o modelo com os dados
 model.fit(x, y)
 
+# Obtendo os coeficientes da regressão
 coeficiente_angular = model.coef_[0]
 intercepto = model.intercept_
 
+# Fazendo previsões
 previsoes = model.predict(x)
 
+# Visualizando os dados e a linha de regressão
 plt.scatter(x, y, color='blue')
 plt.plot(x, previsoes, color='red')
-plt.xlabel('N absoluto do procedimento insuficiência cardiaca, anuais, pagos pelo SUS')
-plt.ylabel('Percentual de  adultos fumantes, por ano.')
-plt.title('Regressão Linear entre 2008 e 2018')
+plt.xlabel('Número médio de cigarros fumados por pessoa por ano')
+plt.ylabel('Taxa de Mortalidade (por 100.000 habitantes)')
+plt.title('Regressão Linear')
+# inverte eixos
+plt.gca().invert_xaxis()
+plt.gca().invert_yaxis()
 plt.show()
 
-print(f"\n")
 print(f"Coeficiente Angular (inclinação): {coeficiente_angular}")
 print(f"Intercepto (coeficiente linear): {intercepto}")
