@@ -1,5 +1,5 @@
 # NF Disciplina Extensionista: Tópicos De Big Data em Pyhton
-As análises presentes neste relatório são de natureza avaliativa, apresentadas na disciplina de 'Tópicos de Big Data em Python'. Os dados são públicos e disponibilizados nos sites oficial do Governo e suas perspectivas secretarias.
+
 <br>
 # Objetivo
 Suponha que você deseje investigar a relação entre o consumo de tabaco e a taxa de mortalidade em um país específico e ano específico e seja necessária uma visualização gráfica representada por um gráfico os resultados desta pesquisa.<br>
